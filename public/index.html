@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Gastos Agro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="app"></div>
+
+  <dialog id="dlg-nuevo-establecimiento">
+    <div class="dialog-inner">
+      <div class="dialog-head">
+        <h2>Nuevo establecimiento</h2>
+        <button class="close-x" data-close-dialog="dlg-nuevo-establecimiento" aria-label="Cerrar">&times;</button>
+      </div>
+      <form id="form-establecimiento">
+        <div class="field">
+          <label for="est-nombre">Nombre del campo / establecimiento</label>
+          <input id="est-nombre" name="nombre" required placeholder="Ej: Estancia La Rossi" />
+        </div>
+        <div class="field">
+          <label for="est-cliente">Cliente (razón social o apellido)</label>
+          <input id="est-cliente" name="cliente" placeholder="Ej: Rossi Hnos." />
+        </div>
+        <div id="est-error"></div>
+        <button type="submit" class="btn btn-primary btn-block">Crear establecimiento</button>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="dlg-nuevo-usuario">
+    <div class="dialog-inner">
+      <div class="dialog-head">
+        <h2 id="usuario-dialog-title">Nuevo usuario</h2>
+        <button class="close-x" data-close-dialog="dlg-nuevo-usuario" aria-label="Cerrar">&times;</button>
+      </div>
+      <form id="form-usuario">
+        <div class="field">
+          <label for="usr-establecimiento">Establecimiento</label>
+          <select id="usr-establecimiento" name="establecimientoId" required></select>
+        </div>
+        <div class="field">
+          <label for="usr-rol">Tipo de usuario</label>
+          <select id="usr-rol" name="rol" required>
+            <option value="empleado">Empleado (carga gastos)</option>
+            <option value="cliente">Cliente (solo ve el panel)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="usr-nombre">Nombre completo</label>
+          <input id="usr-nombre" name="nombreCompleto" required placeholder="Ej: Juan Pérez" />
+        </div>
+        <div class="field">
+          <label for="usr-username">Nombre de usuario</label>
+          <input id="usr-username" name="username" required placeholder="Ej: jperez" autocapitalize="off" />
+        </div>
+        <div class="field">
+          <label for="usr-password">Contraseña inicial</label>
+          <input id="usr-password" name="password" required minlength="6" placeholder="Mínimo 6 caracteres" />
+        </div>
+        <div id="usr-error"></div>
+        <button type="submit" class="btn btn-primary btn-block">Crear usuario</button>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="dlg-nuevo-gasto">
+    <div class="dialog-inner">
+      <div class="dialog-head">
+        <h2>Cargar gasto</h2>
+        <button class="close-x" data-close-dialog="dlg-nuevo-gasto" aria-label="Cerrar">&times;</button>
+      </div>
+      <form id="form-gasto">
+        <div class="grid-2">
+          <div class="field">
+            <label for="gasto-fecha">Fecha</label>
+            <input id="gasto-fecha" name="fecha" type="date" required />
+          </div>
+          <div class="field">
+            <label for="gasto-monto">Monto ($)</label>
+            <input id="gasto-monto" name="monto" type="number" min="0.01" step="0.01" inputmode="decimal" required placeholder="0,00" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="gasto-categoria">Categoría</label>
+          <select id="gasto-categoria" name="categoria" required></select>
+        </div>
+        <div class="field">
+          <label for="gasto-descripcion">Descripción</label>
+          <textarea id="gasto-descripcion" name="descripcion" placeholder="Ej: Gasoil para el tractor, 100 litros"></textarea>
+        </div>
+        <div class="field">
+          <label for="gasto-foto">Foto del comprobante (opcional)</label>
+          <div class="photo-input-wrap">
+            <img id="gasto-foto-preview" class="photo-preview" alt="Vista previa del comprobante" />
+            <input id="gasto-foto" name="foto" type="file" accept="image/*" capture="environment" />
+          </div>
+          <div class="helper-text">Sacá la foto directamente con la cámara del celular. Se comprime sola.</div>
+        </div>
+        <div id="gasto-error"></div>
+        <button type="submit" class="btn btn-primary btn-block" id="btn-guardar-gasto">Guardar gasto</button>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="dlg-cambiar-password">
+    <div class="dialog-inner">
+      <div class="dialog-head">
+        <h2>Cambiar contraseña</h2>
+        <button class="close-x" data-close-dialog="dlg-cambiar-password" aria-label="Cerrar">&times;</button>
+      </div>
+      <form id="form-password">
+        <div class="field">
+          <label for="pw-actual">Contraseña actual</label>
+          <input id="pw-actual" name="passwordActual" type="password" required />
+        </div>
+        <div class="field">
+          <label for="pw-nueva">Contraseña nueva</label>
+          <input id="pw-nueva" name="passwordNueva" type="password" required minlength="6" />
+        </div>
+        <div id="pw-error"></div>
+        <button type="submit" class="btn btn-primary btn-block">Guardar contraseña</button>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="/app.js"></script>
+</body>
+</html>
